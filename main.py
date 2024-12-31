@@ -3,10 +3,13 @@ from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from player import Player
 
 def main():
+    pygame.init()
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
     player = Player(x,y)
-    pygame.init()
     clock = pygame.time.Clock()
     dt = 0
     print("Starting asteroids!")
@@ -22,8 +25,10 @@ def main():
                     if event.key == pygame.K_ESCAPE:  
                         return 
             screen.fill((0,0,0))
-            player.update(dt)
-            player.draw(screen)  # Ensure the player is drawn before flipping
+            for sprite in updatable:
+                sprite.update(dt)
+            for sprite in drawable:
+                sprite.draw(screen)
             pygame.display.flip()
             dt = clock.tick(60) / 1000
     except KeyboardInterrupt: 
