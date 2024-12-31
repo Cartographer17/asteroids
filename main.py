@@ -1,3 +1,6 @@
+import os
+print("Current working directory:", os.getcwd())
+
 import pygame
 import sys
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
@@ -50,6 +53,10 @@ def main():
                     pygame.time.wait(2000)  # 2000 milliseconds = 2 seconds
                     print("Game Over!")  
                     sys.exit()
+                for shot in shots_group:
+                    if shot.collisions(sprite):
+                        sprite.split()
+                        shot.kill()
             pygame.display.flip()
             dt = clock.tick(60) / 1000
     except Exception as e:
