@@ -30,7 +30,6 @@ def main():
         print("Game interrupted by keyboard.")
     finally:
         pygame.quit()
-        
 
 if __name__ == "__main__":
     main()
