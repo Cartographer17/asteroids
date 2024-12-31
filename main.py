@@ -22,11 +22,14 @@ def main():
                     if event.key == pygame.K_ESCAPE:  
                         return 
             screen.fill((0,0,0))
+            player.update(dt)
             player.draw(screen)  # Ensure the player is drawn before flipping
             pygame.display.flip()
             dt = clock.tick(60) / 1000
     except KeyboardInterrupt: 
         print("Game interrupted by keyboard.")
+    finally:
+        pygame.quit()
         
 
 if __name__ == "__main__":
